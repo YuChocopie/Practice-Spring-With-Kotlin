@@ -15,7 +15,7 @@ class UserController(val userService: UserService) {
 
     @PostMapping("/sign-in")
     fun signIn(@RequestBody reqSignInDto: ReqSignInDto): ResponseEntity<Response<User.User>> {
-        val user = User.User(userService.signIn(reqSignInDto).userId)
+        val user = User.User(userService.signIn(reqSignInDto))
         val response = Response(200, null, "",  user )
         return ResponseEntity.status(HttpStatus.OK).body(response)
     }

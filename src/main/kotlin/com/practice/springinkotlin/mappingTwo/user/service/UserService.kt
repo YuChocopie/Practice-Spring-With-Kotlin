@@ -15,8 +15,9 @@ class UserService(val userRepository: UserRepository) {
         return  userRepository.save(user)
     }
 
-    fun signIn(reqSignInDto: ReqSignInDto): User {
-        return userRepository.findByUserIdAndPassword(reqSignInDto.userId, reqSignInDto.password)
+    fun signIn(reqSignInDto: ReqSignInDto): Long? {
+        val user = userRepository.findByUserIdAndPassword(reqSignInDto.userId, reqSignInDto.password)
+        return user.id
     }
 }
 

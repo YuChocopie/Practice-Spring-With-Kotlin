@@ -9,7 +9,7 @@ class User(@Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long?
            var password: String,
            var name: String,
            var age: Int) {
-    class User(var userId: String)
+    class User(var id: Long?)
 
     constructor(userId: String, password: String, name: String, age: Int): this(null, userId, password, name, age)
 }
