@@ -19,8 +19,8 @@ class LikeController(var likeService: LikeService){
         return ResponseEntity.status(HttpStatus.OK).body(response)
     }
 
-    @DeleteMapping("/?postId={postId}&userId={userId}")
-    fun delete(@RequestParam("postId") postId: Long ,@RequestParam("userId") userId:Long): ResponseEntity<Response<Unit>> {
+    @DeleteMapping("")
+    fun delete(@PathVariable postId: Long ,@RequestParam("userId") userId:Long): ResponseEntity<Response<Unit>> {
         val like = likeService.delete(postId,userId)
         val response = Response(200, null, "", like)
         return ResponseEntity.status(HttpStatus.OK).body(response)

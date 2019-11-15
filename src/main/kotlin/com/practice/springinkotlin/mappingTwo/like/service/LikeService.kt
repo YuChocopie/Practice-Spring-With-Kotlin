@@ -8,13 +8,12 @@ import org.springframework.stereotype.Service
 @Service
 class LikeService(val likesRepository: LikeRepository) {
     fun create(postId: Long, requestCreateLikeDto: ReqCreateLikeDto): Like {
-        val like = Like(requestCreateLikeDto.likeType, requestCreateLikeDto.postId, requestCreateLikeDto.userId)
+        val like = Like(requestCreateLikeDto.likeType, requestCreateLikeDto.userId, postId)
         return likesRepository.save(like)
     }
 
-    fun delete(postId: Long, userId: Long) {
-        val like = likesRepository.findByPostId(postId)
-        if (like.userId == userId)
-            return likesRepository.deleteById(postId)
+    fun delete(postId: Long, userId: Long): Unit? {
+        val like = likesRepository.findByPostIdAndUserId(postId, userId)
+        return like.id?.let { likesRepository.deleteById(it) }!!
     }
 }
