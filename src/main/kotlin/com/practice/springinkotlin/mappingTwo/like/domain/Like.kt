@@ -6,10 +6,11 @@ import javax.persistence.*
 @Table(name="likes_jy")
 class Like(@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
             var id: Long? = null,
-           var likeType: String,
+           @Enumerated(EnumType.STRING)
+           var likeType: LikeType,
            var postId: Long,
            var userId: Long) {
 
-    constructor(likeType: String, postId: Long, userId: Long):this(null, likeType, userId, postId)
+    constructor(likeType: LikeType, postId: Long, userId: Long):this(null, likeType, userId, postId)
 
 }
